@@ -1,0 +1,8 @@
+name = "saigon-teu-photo-album"
+compatibility_date = "2026-07-21"
+pages_build_output_dir = "public"
+
+# Configure these in Cloudflare Pages > Settings > Variables and Secrets:
+# SUPABASE_URL
+# SUPABASE_SERVICE_ROLE_KEY (secret)
+# PHOTOBOOTH_API_SECRET (secret)

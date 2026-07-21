@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>Ảnh của bạn — Saigon Tếu Photobooth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/album.css" />
+</head>
+<body>
+  <header class="brand-bar">
+    <div class="brand-mark">ST</div>
+    <div><strong>SAIGON TẾU</strong><span>PHOTOBOOTH</span></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">KỶ NIỆM CỦA RIÊNG BẠN</p>
+      <h1>ẢNH TƯƠI ĐÃ TỚI!</h1>
+      <p id="album-subtitle">Đang mở album của bạn...</p>
+    </section>
+
+    <section id="loading" class="state-card"><div class="spinner"></div><p>Đang tải ảnh...</p></section>
+    <section id="error" class="state-card hidden">
+      <div class="state-icon">!</div><h2>Không mở được album</h2><p id="error-message"></p>
+      <button onclick="location.reload()">THỬ LẠI</button>
+    </section>
+    <section id="album" class="hidden">
+      <div id="photo-grid" class="photo-grid"></div>
+      <div class="tip"><strong>Mẹo tải ảnh:</strong> mở ảnh rồi nhấn giữ trên điện thoại để lưu bản chất lượng cao.</div>
+      <p id="expiry" class="expiry"></p>
+    </section>
+  </main>
+
+  <div id="viewer" class="viewer hidden" role="dialog" aria-modal="true">
+    <button id="viewer-close" class="viewer-close" aria-label="Đóng">×</button>
+    <img id="viewer-image" alt="Ảnh photobooth kích thước lớn" />
+    <a id="viewer-download" class="download-button" target="_blank" rel="noopener">MỞ ẢNH GỐC ĐỂ TẢI</a>
+  </div>
+
+  <footer>Saigon Tếu Photobooth · Album riêng tư theo từng lượt chụp</footer>
+  <script src="/assets/album.js" defer></script>
+</body>
+</html>
