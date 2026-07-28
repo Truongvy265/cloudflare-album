@@ -34,6 +34,9 @@ function renderAlbum(session) {
     else card.className = 'photo-card';
     const img = document.createElement('img');
     img.src = image.directUrl;
+    img.style.width = '100%';
+    img.style.height = 'auto';
+    img.style.objectFit = 'contain';
     img.alt = image.kind === 'collage' ? 'Ảnh ghép hoàn chỉnh' : `Ảnh gốc ${index + 1}`;
     img.loading = index < 2 ? 'eager' : 'lazy';
     img.addEventListener('click', () => openViewer(image));
