@@ -9,6 +9,10 @@ Open Supabase SQL Editor and run:
 
 `supabase/migrations/001_photo_sessions.sql`
 
+Then run the required survey migration:
+
+`supabase/migrations/002_survey_responses.sql`
+
 RLS is enabled and no browser policy is created. Only the service-role key used
 inside Cloudflare Pages Functions can read or write session rows.
 
@@ -63,3 +67,17 @@ delete from public.photo_sessions where expires_at < now();
 ```
 
 ImgBB files have their own retention policy and are not deleted by this query.
+
+## Survey gate and exports
+
+The public album endpoint returns only session metadata. Image URLs are returned
+only after a valid survey is submitted to the session survey endpoint. Survey
+answers are stored privately in `public.survey_responses`; the browser never
+receives Supabase credentials.
+
+To review or download responses, open **Supabase > Table Editor >
+survey_responses**. Use the table filters as needed, then choose **Export data >
+CSV**. Survey rows remain available if expired photo session rows are physically
+deleted; `session_token` keeps the anonymous link to the original session. Set a
+retention/deletion policy appropriate for names, email addresses and phone
+numbers before production use.

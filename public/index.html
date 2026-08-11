@@ -1,47 +1,48 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
   <title>Ảnh của bạn — Saigon Tếu Photobooth</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/album.css?v=20260728-2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Be+Vietnam+Pro:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/album.css?v=20260811-1">
 </head>
 <body>
-  <header class="brand-bar">
-    <div class="brand-mark">ST</div>
-    <div><strong>SAIGON TẾU</strong><span>PHOTOBOOTH</span></div>
-  </header>
-
+  <header class="brand-bar"><div class="brand"><div class="brand-mark">ST</div><div><strong>SAIGON TẾU</strong><span>PHOTOBOOTH</span></div></div><div class="private-badge">ALBUM RIÊNG TƯ</div></header>
   <main>
-    <section class="hero">
-      <p class="eyebrow">KỶ NIỆM CỦA RIÊNG BẠN</p>
-      <h1>ẢNH TƯƠI ĐÃ TỚI!</h1>
-      <p id="album-subtitle">Đang mở album của bạn...</p>
+    <section class="hero"><p class="eyebrow">KỶ NIỆM CỦA RIÊNG BẠN</p><h1 id="page-title">ẢNH TƯƠI ĐÃ TỚI!</h1><p id="album-subtitle">Đang tìm album của bạn...</p></section>
+    <section id="loading" class="state-card"><div class="spinner"></div><p>Đang mở album...</p></section>
+    <section id="error" class="state-card hidden"><div class="state-icon">!</div><h2>KHÔNG MỞ ĐƯỢC ALBUM</h2><p id="error-message"></p><button onclick="location.reload()">THỬ LẠI</button></section>
+
+    <section id="survey" class="survey-shell hidden">
+      <div class="survey-intro"><span>1 PHÚT</span><h2>TRƯỚC KHI NHẬN ẢNH...</h2><p>Cho Saigon Tếu xin một chút cảm nhận để trải nghiệm Photobooth ngày càng xịn hơn nhé. Hoàn thành khảo sát để mở toàn bộ ảnh.</p><div class="survey-art">📸<strong>ẢNH CỦA BẠN<br>ĐANG CHỜ!</strong></div></div>
+      <form id="survey-form" novalidate>
+        <div class="form-grid"><label>Họ và tên <b>*</b><input name="fullName" autocomplete="name" maxlength="120" required placeholder="Nguyễn Văn A"></label><label>Email <b>*</b><input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="ban@email.com"></label></div>
+        <label>Số điện thoại <b>*</b><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="09xx xxx xxx"></label>
+        <fieldset><legend>Bạn có thích chụp Photobooth không? <b>*</b></legend><div class="choice-row"><label class="choice"><input type="radio" name="likesPhotobooth" value="yes" required><span>Có</span></label><label class="choice"><input type="radio" name="likesPhotobooth" value="no"><span>Không</span></label></div></fieldset>
+        <fieldset><legend>Mức giá nào theo bạn là hợp lý cho một lượt chụp Photobooth? <b>*</b></legend><div class="choice-stack">
+          <label class="choice"><input type="radio" name="priceRange" value="70000" required><span>70.000 VNĐ / lượt <small>Giá phổ thông</small></span></label>
+          <label class="choice"><input type="radio" name="priceRange" value="100000"><span>100.000 VNĐ / lượt <small>Khung ảnh & phụ kiện độc lạ, chất lượng</small></span></label>
+          <label class="choice"><input type="radio" name="priceRange" value="over100000"><span>Trên 100.000 VNĐ / lượt <small>Nhiều hiệu ứng đặc biệt/file tặng kèm</small></span></label>
+          <label class="choice"><input type="radio" name="priceRange" value="other"><span>Mức giá khác</span></label>
+          <input class="hidden" id="price-other" name="priceOther" maxlength="120" placeholder="Nhập mức giá hoặc ý kiến của bạn">
+        </div></fieldset>
+        <fieldset><legend>Saigon Tếu có Photobooth, bạn có sẵn sàng cho một lượt chụp không? <b>*</b></legend><div class="choice-stack">
+          <label class="choice"><input type="radio" name="readiness" value="considering" required><span>Suy nghĩ</span></label><label class="choice"><input type="radio" name="readiness" value="ready"><span>Sẵn sàng</span></label><label class="choice"><input type="radio" name="readiness" value="very_ready"><span>Rất sẵn sàng</span></label><label class="choice"><input type="radio" name="readiness" value="excited"><span>Đang rất là mong chờ</span></label>
+        </div></fieldset>
+        <label>Bạn có góp ý gì để trải nghiệm chụp Photobooth trở nên tuyệt vời hơn? <b>*</b><textarea name="feedback" maxlength="1000" required placeholder="Chia sẻ cùng Saigon Tếu nhé..."></textarea></label>
+        <label class="consent"><input type="checkbox" name="consent" required><span>Tôi đồng ý để Saigon Tếu lưu thông tin trên nhằm tổng hợp khảo sát và cải thiện dịch vụ. <b>*</b></span></label>
+        <p id="form-error" class="form-error hidden"></p><button id="survey-submit" type="submit">GỬI KHẢO SÁT & MỞ ẢNH →</button>
+      </form>
     </section>
 
-    <section id="loading" class="state-card"><div class="spinner"></div><p>Đang tải ảnh...</p></section>
-    <section id="error" class="state-card hidden">
-      <div class="state-icon">!</div><h2>Không mở được album</h2><p id="error-message"></p>
-      <button onclick="location.reload()">THỬ LẠI</button>
-    </section>
-    <section id="album" class="hidden">
-      <div id="photo-grid" class="photo-grid"></div>
-      <div class="tip"><strong>Mẹo tải ảnh:</strong> mở ảnh rồi nhấn giữ trên điện thoại để lưu bản chất lượng cao.</div>
-      <p id="expiry" class="expiry"></p>
-    </section>
+    <section id="album" class="hidden"><div class="album-heading"><div><p class="eyebrow">KHẢO SÁT ĐÃ HOÀN TẤT</p><h2>ALBUM CỦA BẠN</h2></div><span id="photo-count"></span></div><div id="photo-grid" class="photo-grid"></div><div class="tip"><strong>Mẹo tải ảnh:</strong> chạm vào ảnh để xem lớn, sau đó chọn “Mở ảnh gốc” hoặc nhấn giữ để lưu về điện thoại.</div><p id="expiry" class="expiry"></p></section>
   </main>
-
-  <div id="viewer" class="viewer hidden" role="dialog" aria-modal="true">
-    <button id="viewer-close" class="viewer-close" aria-label="Đóng">×</button>
-    <img id="viewer-image" alt="Ảnh photobooth kích thước lớn" />
-    <a id="viewer-download" class="download-button" target="_blank" rel="noopener">MỞ ẢNH GỐC ĐỂ TẢI</a>
-  </div>
-
+  <div id="viewer" class="viewer hidden" role="dialog" aria-modal="true"><button id="viewer-close" class="viewer-close" aria-label="Đóng">×</button><img id="viewer-image" alt="Ảnh Photobooth kích thước lớn"><a id="viewer-download" class="download-button" target="_blank" rel="noopener">MỞ ẢNH GỐC ĐỂ TẢI</a></div>
   <footer>Saigon Tếu Photobooth · Album riêng tư theo từng lượt chụp</footer>
-  <script src="/assets/album.js?v=20260728-2" defer></script>
+  <script src="/assets/album.js?v=20260811-1" defer></script>
 </body>
 </html>

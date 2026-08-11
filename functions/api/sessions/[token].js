@@ -17,7 +17,7 @@ export async function onRequestGet({ params, env }) {
   const query = new URLSearchParams({
     token: `eq.${token}`,
     expires_at: `gt.${new Date().toISOString()}`,
-    select: 'token,mode,image_count,images,created_at,expires_at',
+    select: 'token,mode,image_count,created_at,expires_at',
     limit: '1'
   });
   const response = await fetch(`${env.SUPABASE_URL}/rest/v1/photo_sessions?${query}`, {
@@ -35,7 +35,7 @@ export async function onRequestGet({ params, env }) {
     token: session.token,
     mode: session.mode,
     imageCount: session.image_count,
-    images: session.images,
+    surveyRequired: true,
     createdAt: session.created_at,
     expiresAt: session.expires_at
   });
