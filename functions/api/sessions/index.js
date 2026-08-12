@@ -35,8 +35,8 @@ export async function onRequestPost({ request, env }) {
   const images = input?.images;
   if (!['quick2', 'photobooth'].includes(mode)) return json({ error: 'Invalid session mode.' }, 400);
   if (typeof token !== 'string' || !/^[A-Za-z0-9_-]{20,80}$/.test(token)) return json({ error: 'Invalid session token.' }, 400);
-  if (!Array.isArray(images) || images.length < 1 || images.length > 6 || !images.every(isValidImage)) {
-    return json({ error: 'Session must contain 1-6 valid images.' }, 400);
+  if (!Array.isArray(images) || images.length < 1 || images.length > 9 || !images.every(isValidImage)) {
+    return json({ error: 'Session must contain 1-9 valid images.' }, 400);
   }
 
   const publicImages = images.map(({ directUrl, viewerUrl, kind, order }) => ({
