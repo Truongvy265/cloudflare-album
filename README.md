@@ -13,6 +13,10 @@ Then run the required survey migration:
 
 `supabase/migrations/002_survey_responses.sql`
 
+For a human-readable Vietnamese export matching the survey form, also run:
+
+`supabase/migrations/003_survey_responses_export_view.sql`
+
 RLS is enabled and no browser policy is created. Only the service-role key used
 inside Cloudflare Pages Functions can read or write session rows.
 
@@ -76,8 +80,9 @@ answers are stored privately in `public.survey_responses`; the browser never
 receives Supabase credentials.
 
 To review or download responses, open **Supabase > Table Editor >
-survey_responses**. Use the table filters as needed, then choose **Export data >
-CSV**. Survey rows remain available if expired photo session rows are physically
+survey_responses_export**. This view contains only the seven survey columns, with
+Vietnamese headings and human-readable answers. Use the table filters as needed,
+then choose **Export data > CSV**. Survey rows remain available if expired photo session rows are physically
 deleted; `session_token` keeps the anonymous link to the original session. Set a
 retention/deletion policy appropriate for names, email addresses and phone
 numbers before production use.
