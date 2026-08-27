@@ -34,9 +34,9 @@ export async function onRequestPost({ request, params, env }) {
 
   if (!validEmail(email)) return json({ error: 'Email không hợp lệ.' }, 400);
   if (!validPhone(phone)) return json({ error: 'Số điện thoại không hợp lệ.' }, 400);
-  if (!['yes', 'no'].includes(willingToPayTalentFrame)) return json({ error: 'Vui lòng trả lời câu hỏi về frame Talent.' }, 400);
-  if (!['yes', 'no'].includes(wouldBuyTicket)) return json({ error: 'Vui lòng trả lời câu hỏi về việc mua vé.' }, 400);
-  if (!/^\d{1,10}$/.test(perceivedValue) || Number(perceivedValue) < 0) return json({ error: 'Vui lòng nhập mức giá hợp lệ.' }, 400);
+  if (willingToPayTalentFrame.length < 1 || willingToPayTalentFrame.length > 500) return json({ error: 'Vui lòng trả lời câu hỏi về frame Talent (tối đa 500 ký tự).' }, 400);
+  if (wouldBuyTicket.length < 1 || wouldBuyTicket.length > 500) return json({ error: 'Vui lòng trả lời câu hỏi về việc mua vé (tối đa 500 ký tự).' }, 400);
+  if (perceivedValue.length < 1 || perceivedValue.length > 120) return json({ error: 'Vui lòng nhập mức giá bạn thấy phù hợp (tối đa 120 ký tự).' }, 400);
   if (improvementFeedback.length < 2 || improvementFeedback.length > 1000) return json({ error: 'Vui lòng nhập góp ý (tối đa 1.000 ký tự).' }, 400);
   if (!consent) return json({ error: 'Bạn cần đồng ý lưu thông tin khảo sát để tiếp tục.' }, 400);
 
@@ -61,12 +61,12 @@ export async function onRequestPost({ request, params, env }) {
       session_token: session.token,
       email,
       phone,
-      willing_to_pay_talent_frame: willingToPayTalentFrame === 'yes',
-      would_buy_ticket: wouldBuyTicket === 'yes',
+      willing_to_pay_talent_frame: willingToPayTalentFrame,
+      would_buy_ticket: wouldBuyTicket,
       perceived_value: perceivedValue,
       improvement_feedback: improvementFeedback,
       consent: true,
-      survey_version: 1
+      survey_version: 2
     })
   });
   if (!insertResponse.ok) {

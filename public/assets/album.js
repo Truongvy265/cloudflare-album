@@ -31,21 +31,14 @@ async function downloadAllImages() {
       elements.downloadStatus.textContent = `ĐANG CHUẨN BỊ ẢNH ${index + 1}/${images.length}...`;
       const response = await fetch(image.directUrl);
       if (!response.ok) throw new Error('Không thể tải ảnh.');
-      files.push(new File([await response.blob()], imageFileName(image, index), { type: 'image/jpeg' }));
+      files.push(new File([await response.blob()],imageFileName(image,index),{type:'image/jpeg'}));
     }
-    if (navigator.share && navigator.canShare && navigator.canShare({ files })) {
-      await navigator.share({ title: 'Album ảnh Saigon Tếu', files });
-      elements.downloadStatus.textContent = 'ĐÃ SẴN SÀNG CHIA SẺ TOÀN BỘ ẢNH.';
-    } else {
-      files.forEach(file => {
-        const url = URL.createObjectURL(file);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = file.name;
-        link.click();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      });
-      elements.downloadStatus.textContent = 'ĐÃ BẮT ĐẦU TẢI TOÀN BỘ ẢNH. Hãy cho phép nhiều lượt tải nếu trình duyệt hỏi.';
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files})){
+      await navigator.share({title:'Album ảnh Saigon Tếu',text:'Chọn “Lưu hình ảnh” để thêm toàn bộ ảnh vào thư viện.',files});
+      elements.downloadStatus.textContent='ĐÃ GỬI TOÀN BỘ ẢNH ĐẾN TRÌNH LƯU ẢNH.';
+    }else{
+      for(const file of files){const url=URL.createObjectURL(file);const link=document.createElement('a');link.href=url;link.download=file.name;link.click();await new Promise(resolve=>setTimeout(resolve,350));setTimeout(()=>URL.revokeObjectURL(url),30000);}
+      elements.downloadStatus.textContent='ĐÃ BẮT ĐẦU TẢI TỪNG ẢNH JPG VỀ MÁY.';
     }
   } catch (error) {
     elements.downloadStatus.textContent = error.name === 'AbortError' ? 'ĐÃ HỦY CHIA SẺ ẢNH.' : 'Không thể tải tất cả ảnh. Bạn có thể tải từng ảnh bên dưới.';
