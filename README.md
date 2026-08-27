@@ -80,7 +80,7 @@ answers are stored privately in `public.survey_responses`; the browser never
 receives Supabase credentials.
 
 To review or download responses, open **Supabase > Table Editor >
-survey_responses_export**. This view contains only the seven survey columns, with
+survey_responses_export**. This view contains only the six survey columns, with
 Vietnamese headings and human-readable answers. Use the table filters as needed,
 then choose **Export data > CSV**. Survey rows remain available if expired photo session rows are physically
 deleted; `session_token` keeps the anonymous link to the original session. Set a
