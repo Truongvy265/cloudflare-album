@@ -4,8 +4,8 @@ as
 select
   email as "Email",
   phone as "SĐT",
-  case when willing_to_pay_talent_frame then 'Có' when willing_to_pay_talent_frame is false then 'Không' end as "Bạn có sẵn sàng trả tiền cho Photobooth có frame Talent không?",
-  case when would_buy_ticket then 'Có' when would_buy_ticket is false then 'Không' end as "Áp dụng chung với quyền lợi vé, bạn có sẵn sàng mua vé ngay không?",
+  willing_to_pay_talent_frame as "Bạn có sẵn sàng trả tiền cho Photobooth có frame Talent không?",
+  would_buy_ticket as "Áp dụng chung với quyền lợi vé, bạn có sẵn sàng mua vé ngay không?",
   perceived_value as "Hiện tại Photobooth này đáng giá bao nhiêu?",
   improvement_feedback as "Bạn thấy Photobooth này thiếu gì? Cần bổ sung gì không?"
 from public.survey_responses

@@ -9,6 +9,7 @@
 # Dependencies and Cloudflare local state
 node_modules/
 .wrangler/
+supabase/.temp/
 
 # Logs and editor files
 *.log
