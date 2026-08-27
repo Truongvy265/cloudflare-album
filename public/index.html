@@ -20,26 +20,19 @@
     <section id="survey" class="survey-shell hidden">
       <div class="survey-intro"><span>1 PHÚT</span><h2>TRƯỚC KHI NHẬN ẢNH...</h2><p>Cho Saigon Tếu xin một chút cảm nhận để trải nghiệm Photobooth ngày càng xịn hơn nhé. Hoàn thành khảo sát để mở toàn bộ ảnh.</p><div class="survey-art">📸<strong>ẢNH CỦA BẠN<br>ĐANG CHỜ!</strong></div></div>
       <form id="survey-form" novalidate>
-        <div class="form-grid"><label>Họ và tên <b>*</b><input name="fullName" autocomplete="name" maxlength="120" required placeholder="Nguyễn Văn A"></label><label>Email <b>*</b><input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="ban@email.com"></label></div>
+        <label>Email <b>*</b><input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="ban@email.com"></label>
         <label>Số điện thoại <b>*</b><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="09xx xxx xxx"></label>
-        <fieldset><legend>Bạn có thích chụp Photobooth không? <b>*</b></legend><div class="choice-row"><label class="choice"><input type="radio" name="likesPhotobooth" value="yes" required><span>Có</span></label><label class="choice"><input type="radio" name="likesPhotobooth" value="no"><span>Không</span></label></div></fieldset>
-        <fieldset><legend>Mức giá nào theo bạn là hợp lý cho một lượt chụp Photobooth? <b>*</b></legend><div class="choice-stack">
-          <label class="choice"><input type="radio" name="priceRange" value="70000" required><span>70.000 VNĐ / lượt <small>Giá phổ thông</small></span></label>
-          <label class="choice"><input type="radio" name="priceRange" value="100000"><span>100.000 VNĐ / lượt <small>Khung ảnh & phụ kiện độc lạ, chất lượng</small></span></label>
-          <label class="choice"><input type="radio" name="priceRange" value="over100000"><span>Trên 100.000 VNĐ / lượt <small>Nhiều hiệu ứng đặc biệt/file tặng kèm</small></span></label>
-          <label class="choice"><input type="radio" name="priceRange" value="other"><span>Mức giá khác</span></label>
-          <input class="hidden" id="price-other" name="priceOther" maxlength="120" placeholder="Nhập mức giá hoặc ý kiến của bạn">
-        </div></fieldset>
-        <fieldset><legend>Saigon Tếu có Photobooth, bạn có sẵn sàng cho một lượt chụp không? <b>*</b></legend><div class="choice-stack">
-          <label class="choice"><input type="radio" name="readiness" value="considering" required><span>Suy nghĩ</span></label><label class="choice"><input type="radio" name="readiness" value="ready"><span>Sẵn sàng</span></label><label class="choice"><input type="radio" name="readiness" value="very_ready"><span>Rất sẵn sàng</span></label><label class="choice"><input type="radio" name="readiness" value="excited"><span>Đang rất là mong chờ</span></label>
-        </div></fieldset>
-        <label>Bạn có góp ý gì để trải nghiệm chụp Photobooth trở nên tuyệt vời hơn? <b>*</b><textarea name="feedback" maxlength="1000" required placeholder="Chia sẻ cùng Saigon Tếu nhé..."></textarea></label>
+        <fieldset><legend>Bạn có sẵn sàng trả tiền cho Photobooth có frame Talent không? <b>*</b></legend><div class="choice-row"><label class="choice"><input type="radio" name="willingToPayTalentFrame" value="yes" required><span>Có</span></label><label class="choice"><input type="radio" name="willingToPayTalentFrame" value="no"><span>Không</span></label></div></fieldset>
+        <fieldset><legend>Áp dụng chung với quyền lợi vé, bạn có sẵn sàng mua vé ngay không? <b>*</b></legend><div class="choice-row"><label class="choice"><input type="radio" name="wouldBuyTicket" value="yes" required><span>Có</span></label><label class="choice"><input type="radio" name="wouldBuyTicket" value="no"><span>Không</span></label></div></fieldset>
+        <label>Hiện tại Photobooth này đáng giá bao nhiêu? <b>*</b><input name="perceivedValue" type="number" min="0" max="1000000000" step="1000" inputmode="numeric" required placeholder="Ví dụ: 100000"><small>VNĐ / lượt</small></label>
+        <label>Bạn thấy Photobooth này thiếu gì? Cần bổ sung gì không? <b>*</b><textarea name="improvementFeedback" maxlength="1000" required placeholder="Chia sẻ cùng Saigon Tếu nhé..."></textarea></label>
         <label class="consent"><input type="checkbox" name="consent" required><span>Tôi đồng ý để Saigon Tếu lưu thông tin trên nhằm tổng hợp khảo sát và cải thiện dịch vụ. <b>*</b></span></label>
         <p id="form-error" class="form-error hidden"></p><button id="survey-submit" type="submit">GỬI KHẢO SÁT & MỞ ẢNH →</button>
       </form>
     </section>
 
     <section id="album" class="hidden"><div class="album-heading"><div><p class="eyebrow">KHẢO SÁT ĐÃ HOÀN TẤT</p><h2>ALBUM CỦA BẠN</h2></div><span id="photo-count"></span></div><div id="photo-grid" class="photo-grid"></div><div class="tip"><strong>Mẹo tải ảnh:</strong> chạm vào ảnh để xem lớn, sau đó chọn “Mở ảnh gốc” hoặc nhấn giữ để lưu về điện thoại.</div><p id="expiry" class="expiry"></p></section>
+      <section id="album" class="hidden"><div class="album-heading"><div><p class="eyebrow">KHẢO SÁT ĐÃ HOÀN TẤT</p><h2>ALBUM CỦA BẠN</h2></div><div class="album-actions"><span id="photo-count"></span><button id="download-all" type="button">TẢI TẤT CẢ ẢNH</button></div></div><p id="download-status" class="download-status" role="status" aria-live="polite"></p><div id="photo-grid" class="photo-grid"></div><div class="tip"><strong>Mẹo tải ảnh:</strong> chạm vào ảnh để xem lớn, sau đó chọn “Mở ảnh gốc” hoặc nhấn giữ để lưu về điện thoại.</div><p id="expiry" class="expiry"></p></section>
   </main>
   <div id="viewer" class="viewer hidden" role="dialog" aria-modal="true"><button id="viewer-close" class="viewer-close" aria-label="Đóng">×</button><img id="viewer-image" alt="Ảnh Photobooth kích thước lớn"><a id="viewer-download" class="download-button" target="_blank" rel="noopener">MỞ ẢNH GỐC ĐỂ TẢI</a></div>
   <footer>Saigon Tếu Photobooth · Album riêng tư theo từng lượt chụp</footer>

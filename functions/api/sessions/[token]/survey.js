@@ -24,26 +24,20 @@ export async function onRequestPost({ request, params, env }) {
   try { input = await request.json(); }
   catch (_) { return json({ error: 'Dữ liệu khảo sát không hợp lệ.' }, 400); }
 
-  const fullName = text(input.fullName);
   const email = text(input.email).toLowerCase();
   const phone = text(input.phone);
-  const likesPhotobooth = text(input.likesPhotobooth);
-  const priceRange = text(input.priceRange);
-  const priceOther = text(input.priceOther);
-  const readiness = text(input.readiness);
-  const feedback = text(input.feedback);
+  const willingToPayTalentFrame = text(input.willingToPayTalentFrame);
+  const wouldBuyTicket = text(input.wouldBuyTicket);
+  const perceivedValue = text(input.perceivedValue);
+  const improvementFeedback = text(input.improvementFeedback);
   const consent = input.consent === true;
-  const allowedPrices = ['70000', '100000', 'over100000', 'other'];
-  const allowedReadiness = ['considering', 'ready', 'very_ready', 'excited'];
 
-  if (fullName.length < 2 || fullName.length > 120) return json({ error: 'Vui lòng nhập họ và tên hợp lệ.' }, 400);
   if (!validEmail(email)) return json({ error: 'Email không hợp lệ.' }, 400);
   if (!validPhone(phone)) return json({ error: 'Số điện thoại không hợp lệ.' }, 400);
-  if (!['yes', 'no'].includes(likesPhotobooth)) return json({ error: 'Vui lòng trả lời câu hỏi về Photobooth.' }, 400);
-  if (!allowedPrices.includes(priceRange)) return json({ error: 'Vui lòng chọn mức giá.' }, 400);
-  if (priceRange === 'other' && (priceOther.length < 2 || priceOther.length > 120)) return json({ error: 'Vui lòng nhập mức giá khác.' }, 400);
-  if (!allowedReadiness.includes(readiness)) return json({ error: 'Vui lòng chọn mức độ sẵn sàng.' }, 400);
-  if (feedback.length < 2 || feedback.length > 1000) return json({ error: 'Vui lòng nhập góp ý (tối đa 1.000 ký tự).' }, 400);
+  if (!['yes', 'no'].includes(willingToPayTalentFrame)) return json({ error: 'Vui lòng trả lời câu hỏi về frame Talent.' }, 400);
+  if (!['yes', 'no'].includes(wouldBuyTicket)) return json({ error: 'Vui lòng trả lời câu hỏi về việc mua vé.' }, 400);
+  if (!/^\d{1,10}$/.test(perceivedValue) || Number(perceivedValue) < 0) return json({ error: 'Vui lòng nhập mức giá hợp lệ.' }, 400);
+  if (improvementFeedback.length < 2 || improvementFeedback.length > 1000) return json({ error: 'Vui lòng nhập góp ý (tối đa 1.000 ký tự).' }, 400);
   if (!consent) return json({ error: 'Bạn cần đồng ý lưu thông tin khảo sát để tiếp tục.' }, 400);
 
   const sessionQuery = new URLSearchParams({
@@ -65,14 +59,12 @@ export async function onRequestPost({ request, params, env }) {
     body: JSON.stringify({
       photo_session_id: session.id,
       session_token: session.token,
-      full_name: fullName,
       email,
       phone,
-      likes_photobooth: likesPhotobooth === 'yes',
-      price_range: priceRange,
-      price_other: priceRange === 'other' ? priceOther : null,
-      readiness,
-      feedback,
+      willing_to_pay_talent_frame: willingToPayTalentFrame === 'yes',
+      would_buy_ticket: wouldBuyTicket === 'yes',
+      perceived_value: perceivedValue,
+      improvement_feedback: improvementFeedback,
       consent: true,
       survey_version: 1
     })
